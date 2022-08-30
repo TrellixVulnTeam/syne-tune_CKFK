@@ -38,9 +38,8 @@ recipes = [
     LCBenchRecipe(),
 ]
 
-# Append all yahpo scenarios
-for scn in yahpo_scenarios:
-    recipes.append(YAHPORecipe(scn))
+for scenario in yahpo_scenarios:
+    recipes.append(YAHPORecipe("yahpo-" + scenario))
 
 
 generate_blackbox_recipes = {recipe.name: recipe for recipe in recipes}

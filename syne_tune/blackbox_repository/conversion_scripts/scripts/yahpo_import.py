@@ -1,3 +1,5 @@
+# Copyright 2021 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+#
 # Licensed under the Apache License, Version 2.0 (the "License").
 # You may not use this file except in compliance with the License.
 # A copy of the License is located at
@@ -14,15 +16,21 @@ Wrap Surrogates from
 YAHPO Gym - An Efficient Multi-Objective Multi-Fidelity Benchmark for Hyperparameter Optimization
 Florian Pfisterer, Lennart Schneider, Julia Moosbauer, Martin Binder, Bernd Bischl
 """
-import os
-import pandas as pd
+import logging
+import shutil
+
+from yahpo_gym import benchmark_set
 import numpy as np
 import zipfile
 from pathlib import Path
 
-from syne_tune.blackbox_repository.blackbox_offline import serialize
 from syne_tune.blackbox_repository.conversion_scripts.blackbox_recipe import (
     BlackboxRecipe,
+)
+from syne_tune.blackbox_repository.conversion_scripts.scripts import (
+    default_metric,
+    metric_elapsed_time,
+    resource_attr,
 )
 from syne_tune.blackbox_repository.conversion_scripts.utils import repository_path
 from syne_tune.blackbox_repository.serialize import (
@@ -30,7 +38,7 @@ from syne_tune.blackbox_repository.serialize import (
 )
 import syne_tune.config_space as cs
 from syne_tune.blackbox_repository.blackbox import Blackbox
-from typing import Dict, Optional, Callable, List, Tuple, Union
+from typing import Dict, Optional
 
 
 import ConfigSpace
@@ -38,20 +46,22 @@ from yahpo_gym.benchmark_set import BenchmarkSet
 from yahpo_gym.configuration import list_scenarios
 from yahpo_gym import local_config
 
+from syne_tune.constants import ST_WORKER_ITER
 
-def download(blackbox: str, version: str):
+
+def download(target_path: Path, version: str):
     import urllib
 
     root = "https://github.com/slds-lmu/yahpo_data/archive/refs/tags/"
-    target = repository_path / f"{blackbox}"
 
-    urllib.request.urlretrieve(root + f"v{version}.zip", str(target) + ".zip")
-
-    with zipfile.ZipFile(str(target) + ".zip", "r") as zip_ref:
-        zip_ref.extractall(target)
-
-    # FIXME: Remove zip?
-    # os.remove(str(target)+".zip")
+    target_file = target_path / f"yahpo_data-{version}"
+    if not target_file.exists():
+        logging.info(f"File {target_file} not found redownloading it.")
+        urllib.request.urlretrieve(root + f"v{version}.zip", str(target_path) + ".zip")
+        with zipfile.ZipFile(str(target_path) + ".zip", "r") as zip_ref:
+            zip_ref.extractall(target_path)
+    else:
+        logging.info(f"File {target_file} found, skipping download.")
 
 
 class BlackBoxYAHPO(Blackbox):
@@ -112,10 +122,9 @@ class BlackBoxYAHPO(Blackbox):
         # Set the instance in the benchmark
         self.benchmark.set_instance(instance)
         # Update the configspace with the fixed instance
-        if self.config.instance_names is not None:
-            self.configuration_space[self.benchmark.config.instance_name] = cs.choice(
-                [instance]
-            )
+        self.configuration_space[self.benchmark.config.instance_names] = cs.choice(
+            [instance]
+        )
         return self
 
     @property
@@ -167,10 +176,14 @@ def cs_to_synetune(config_space):
 
 
 def instantiate_yahpo(scenario: str):
+    assert scenario.startswith("yahpo")
+    scenario = scenario[6:]
 
-    # If the string starts with "YAHPO-" get rid of it
-    if "YAHPO-" in scenario:
-        scenario = scenario[6:]
+    local_config.init_config()
+    local_config.set_data_path(str(repository_path / "yahpo"))
+
+    # Select a Benchmark, active_session False because the ONNX session can not be serialized.
+    bench = benchmark_set.BenchmarkSet(scenario, active_session=False)
 
     # FIXME: I can now create one scenario per instance but this is probably
     #        overkill since its just a copy of the same thing with a different constant set?
@@ -178,7 +191,7 @@ def instantiate_yahpo(scenario: str):
         instance: BlackBoxYAHPO(
             BenchmarkSet(scenario, active_session=False)
         ).set_instance(instance)
-        for instance in b.instances
+        for instance in bench.instances
     }
 
 
@@ -186,34 +199,38 @@ def serialize_yahpo(scenario: str, version: str = "1.0"):
     """
     Serialize YAHPO (Metadata only for now)
     """
-    # Step 1: Download Metadata
-    download(blackbox="YAHPO", version=version)
+    assert scenario.startswith("yahpo-")
+    scenario = scenario[6:]
 
-    # Step 2: Set path in the yahpo config
-    data_path = repository_path / "YAHPO" / f"yahpo_data-{version}"
-    local_config.init_config()
-    local_config.set_data_path(data_path)
+    # download yahpo metadata and surrogate
+    download(version=version, target_path=repository_path)
 
-    # Check if instances can be instantiated
-    insts = instantiate_yahpo(scenario)
+    target_path = repository_path / f"yahpo" / scenario
 
-    # For now we only serialize metadata because everything else can be
-    # obtained from YAHPO.
-    path = Path(repository_path / "YAHPO")
-    path.mkdir(exist_ok=True)
-    serialize_metadata(
-        path=path, metadata={"instances": list(insts.keys()), "data_path": data_path}
+    # copy files to yahpo-scenario
+    if target_path.exists():
+        shutil.rmtree(target_path)
+    shutil.copytree(
+        str(repository_path / f"yahpo_data-{version}" / scenario), str(target_path)
     )
-    # FIXME: Do we need to serialize the ConfigSpace/ONNXSurrogate as well?
-    # Might be required if the full benchmark should e.g. be distributed via S3?
+
+    # For now we only serialize metadata because everything else can be obtained from YAHPO.
+    serialize_metadata(
+        path=target_path,
+        metadata={
+            metric_elapsed_time: "time",
+            default_metric: "val_accuracy",
+            resource_attr: ST_WORKER_ITER,  # TODO, ressource not present, we can use ST_WORKER_ITER
+        },
+    )
 
 
 class YAHPORecipe(BlackboxRecipe):
-    def __init__(self, scenario: str):
-        self.scenario = scenario
+    def __init__(self, name: str):
+        self.scenario = name
         super(YAHPORecipe, self).__init__(
-            name=f"YAHPO-{name}",
-            cite_reference="YAHPO Gym - An Efficient Multi-Objective Multi-Fidelity Benchmark for Hyperparameter Optimization"
+            name=name,
+            cite_reference="YAHPO Gym - An Efficient Multi-Objective Multi-Fidelity Benchmark for Hyperparameter Optimization. "
             "Pfisterer F., Schneider S., Moosbauer J., Binder M., Bischl B., 2022",
         )
 
@@ -221,8 +238,32 @@ class YAHPORecipe(BlackboxRecipe):
         serialize_yahpo(self.scenario)
 
 
-yahpo_scenarios = [list_scenarios()]
+yahpo_scenarios = list_scenarios()
 
 
 if __name__ == "__main__":
-    YAHPORecipe("lcbench").generate()
+    root = logging.getLogger()
+    root.setLevel(logging.INFO)
+    scenario = "lcbench"
+
+    YAHPORecipe(f"yahpo-{scenario}").generate()
+
+    # plot one learning-curve for sanity-check
+    from syne_tune.blackbox_repository import load_blackbox
+
+    bb_dict = load_blackbox(f"yahpo-{scenario}", skip_if_present=False)
+    first_task = next(iter(bb_dict.keys()))
+    b = bb_dict[first_task]
+    configuration = {k: v.sample() for k, v in b.configuration_space.items()}
+    errors = []
+    runtime = []
+
+    import matplotlib.pyplot as plt
+
+    for i in range(1, 52):
+        res = b.objective_function(configuration=configuration, fidelity={"epoch": i})
+        errors.append(res["val_accuracy"])
+        runtime.append(res["time"])
+
+    plt.plot(np.cumsum(runtime), errors)
+    plt.show()
