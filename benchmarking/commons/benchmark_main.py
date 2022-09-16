@@ -213,6 +213,7 @@ def main(
             dataset=benchmark.dataset_name,
             surrogate=benchmark.surrogate,
             surrogate_kwargs=benchmark.surrogate_kwargs,
+            add_surrogate_kwargs=benchmark.add_surrogate_kwargs,
             support_checkpointing=args.support_checkpointing,
         )
 
@@ -259,6 +260,7 @@ def main(
             "algorithm": method,
             "tag": experiment_tag,
             "benchmark": benchmark_name,
+            "predict_curves": int(benchmark.add_surrogate_kwargs["predict_curves"]),
         }
         if extra_args is not None:
             metadata.update(extra_args)

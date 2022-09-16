@@ -27,6 +27,7 @@ class BenchmarkDefinition:
     max_num_evaluations: Optional[int] = None
     surrogate: Optional[str] = None
     surrogate_kwargs: Optional[dict] = None
+    add_surrogate_kwargs: Optional[dict] = None
     datasets: Optional[List[str]] = None
 
 
@@ -79,8 +80,13 @@ def lcbench_benchmark(dataset_name, datasets):
         mode="max",
         blackbox_name="lcbench",
         dataset_name=dataset_name,
-        surrogate="KNeighborsRegressor",
-        surrogate_kwargs={"n_neighbors": 1},
+        # surrogate="KNeighborsRegressor",
+        # surrogate_kwargs={"n_neighbors": 1},
+        surrogate="RandomForestRegressor",
+        add_surrogate_kwargs={
+            "predict_curves": True,
+            "fit_differences": ["time"],
+        },
         max_num_evaluations=4000,
         datasets=datasets,
         max_resource_attr="epochs",
@@ -96,6 +102,8 @@ benchmark_definitions = {
     "nas201-cifar100": nas201_benchmark("cifar100"),
     "nas201-ImageNet16-120": nas201_benchmark("ImageNet16-120"),
 }
+
+benchmark_definitions = dict()  # DEBUG
 
 # 5 most expensive lcbench datasets
 lc_bench_datasets = [

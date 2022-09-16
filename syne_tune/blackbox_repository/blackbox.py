@@ -13,15 +13,18 @@
 from numbers import Number
 
 import pandas as pd
-from typing import Dict, Optional, Callable, List, Tuple, Union
+from typing import Optional, Callable, List, Tuple, Union, Dict
 import numpy as np
+
+
+ObjectiveFunctionResult = Union[Dict[str, float], np.ndarray]
 
 
 class Blackbox:
     def __init__(
         self,
-        configuration_space: Dict,
-        fidelity_space: Optional[Dict] = None,
+        configuration_space: dict,
+        fidelity_space: Optional[dict] = None,
         objectives_names: Optional[List[str]] = None,
     ):
         """
@@ -33,10 +36,10 @@ class Blackbox:
 
     def objective_function(
         self,
-        configuration: Dict,
-        fidelity: Union[Dict, Number] = None,
+        configuration: dict,
+        fidelity: Union[dict, Number] = None,
         seed: Optional[int] = None,
-    ) -> Dict:
+    ) -> ObjectiveFunctionResult:
         """
         Returns an evaluation of the blackbox, first perform data check and then call `_objective_function` that should
         be overriden in the child class.
@@ -45,7 +48,8 @@ class Blackbox:
         or if it has a single fidelity in its fidelity space. In the latter case, all fidelities are returned in form
         of a tensor with shape (num_fidelities, num_objectives).
         :param seed:
-        :return: dictionary of objectives evaluated or tensor with shape (num_fidelities, num_objectives) if no fidelity
+        :return: dictionary of objectives evaluated or tensor with shape
+            (num_fidelities, num_objectives) if no fidelity
         was given.
         """
         if self.fidelity_space is None:
@@ -76,26 +80,42 @@ class Blackbox:
 
     def _objective_function(
         self,
-        configuration: Dict,
-        fidelity: Optional[Dict] = None,
+        configuration: dict,
+        fidelity: Optional[dict] = None,
         seed: Optional[int] = None,
-    ) -> Dict:
+    ) -> ObjectiveFunctionResult:
         """
         Override this function to provide your benchmark function.
         """
         pass
 
-    def __call__(self, *args, **kwargs) -> Dict:
+    def __call__(self, *args, **kwargs) -> ObjectiveFunctionResult:
         """
         Allows to call blackbox directly as a function rather than having to call the specific method.
         :return:
         """
         return self.objective_function(*args, **kwargs)
 
-    def hyperparameter_objectives_values(self) -> Tuple[pd.DataFrame, pd.DataFrame]:
+    def hyperparameter_objectives_values(
+        self, predict_curves: bool = False
+    ) -> Tuple[pd.DataFrame, pd.DataFrame]:
         """
-        :return: a tuple of two dataframes, the first one contains hyperparameters values and the second
-        one contains objective values, this is used when fitting a surrogate model.
+        If `predict_curves` is False, the shape of X is
+        `(num_evals * num_seeds * num_fidelities, num_hps + 1)`, the shape of y
+        is `(num_evals * num_seeds * num_fidelities, num_objectives)`.
+        This can be reshaped to `(num_fidelities, num_seeds, num_evals, *)`.
+        The final column of X is the fidelity value (only a single fidelity
+        attribute is supported).
+
+        If `predict_curves` is True, the shape of X is
+        `(num_evals * num_seeds, num_hps)`, the shape of y is
+        `(num_evals * num_seeds, num_fidelities * num_objectives)`. The latter
+        can be reshaped to `(num_seeds, num_evals, num_fidelities,
+        num_objectives)`.
+
+        :return: a tuple of two dataframes (X, y), where X contains
+            hyperparameters values and y contains objective values, this is
+            used when fitting a surrogate model.
         """
         pass
 
@@ -108,9 +128,9 @@ class Blackbox:
 
 
 def from_function(
-    configuration_space: Dict,
+    configuration_space: dict,
     eval_fun: Callable,
-    fidelity_space: Optional[Dict] = None,
+    fidelity_space: Optional[dict] = None,
     objectives_names: Optional[List[str]] = None,
 ):
     """
@@ -118,6 +138,7 @@ def from_function(
     :param configuration_space:
     :param eval_fun: function that returns dictionary of objectives given configuration and fidelity
     :param fidelity_space:
+    :param objectives_names:
     :return:
     """
 
@@ -131,10 +152,10 @@ def from_function(
 
         def objective_function(
             self,
-            configuration: Dict,
-            fidelity: Optional[Dict] = None,
+            configuration: dict,
+            fidelity: Optional[dict] = None,
             seed: Optional[int] = None,
-        ) -> Dict:
+        ) -> ObjectiveFunctionResult:
             return eval_fun(configuration, fidelity, seed)
 
     return BB()

@@ -15,7 +15,10 @@ from typing import List, Dict, Optional, Tuple, Union
 import pandas as pd
 import numpy as np
 
-from syne_tune.blackbox_repository.blackbox import Blackbox
+from syne_tune.blackbox_repository.blackbox import (
+    Blackbox,
+    ObjectiveFunctionResult,
+)
 from syne_tune.blackbox_repository.serialize import (
     serialize_configspace,
     deserialize_configspace,
@@ -28,8 +31,8 @@ class BlackboxTabular(Blackbox):
     def __init__(
         self,
         hyperparameters: pd.DataFrame,
-        configuration_space: Dict,
-        fidelity_space: Dict,
+        configuration_space: dict,
+        fidelity_space: dict,
         objectives_evaluations: np.array,
         fidelity_values: Optional[np.array] = None,
         objectives_names: Optional[List[str]] = None,
@@ -52,6 +55,7 @@ class BlackboxTabular(Blackbox):
             fidelity_space=fidelity_space,
             objectives_names=objectives_names,
         )
+        assert len(fidelity_space) == 1, "Only a single fidelity supported for now"
         # todo missing-value support, should boils down to droping nans in `hyperparameter_objectives_values`
         num_hps = len(hyperparameters.columns)
 
@@ -106,10 +110,10 @@ class BlackboxTabular(Blackbox):
 
     def _objective_function(
         self,
-        configuration: Union[Dict, int],
-        fidelity: Optional[Dict] = None,
+        configuration: Union[dict, int],
+        fidelity: Optional[dict] = None,
         seed: Optional[int] = None,
-    ) -> Dict:
+    ) -> ObjectiveFunctionResult:
         if seed is not None:
             assert 0 <= seed < self.num_seeds
         else:
@@ -181,27 +185,62 @@ class BlackboxTabular(Blackbox):
         objectives_evaluations = objectives_evaluations[~nan_mask]
         return hyperparameters, objectives_evaluations
 
-    def hyperparameter_objectives_values(self):
+    # TODO: It is odd that `y` is transposed when compared to
+    # `objectives_evaluations`. Keep it this way, but it would be simpler
+    # to understand if this was not done
+    def hyperparameter_objectives_values(
+        self, predict_curves: bool = False
+    ) -> Tuple[pd.DataFrame, pd.DataFrame]:
         """
-        :return: X, y of shape (num_evals * num_seeds * num_fidelities, num_hps)
-        and (num_evals * num_seeds * num_fidelities, num_objectives)
+        If `predict_curves` is False, the shape of X is
+        `(num_evals * num_seeds * num_fidelities, num_hps + 1)`, the shape of y
+        is `(num_evals * num_seeds * num_fidelities, num_objectives)`.
+        This can be reshaped to `(num_fidelities, num_seeds, num_evals, *)`.
+        The final column of X is the fidelity value (only a single fidelity
+        attribute is supported).
+
+        If `predict_curves` is True, the shape of X is
+        `(num_evals * num_seeds, num_hps)`, the shape of y is
+        `(num_evals * num_seeds, num_fidelities * num_objectives)`. The latter
+        can be reshaped to `(num_seeds, num_evals, num_fidelities,
+        num_objectives)`.
         """
         objectives_evaluations = self.objectives_evaluations
         hyperparameters = self.hyperparameters
         if np.isnan(np.sum(objectives_evaluations)):
             hyperparameters, objectives_evaluations = self._impute_objectives_values()
 
-        Xs = []
-        ys = []
-        for fidelity_index, fidelity_value in enumerate(self.fidelity_values):
-            X = hyperparameters.copy()
-            X[list(self.fidelity_space.keys())[0]] = fidelity_value
-            for seed in range(self.num_seeds):
-                Xs.append(X)
-                # (num_evals, num_objectives)
-                ys.append(objectives_evaluations[:, seed, fidelity_index, :])
-        X = pd.concat(Xs, ignore_index=True)
-        y = pd.DataFrame(data=np.vstack(ys), columns=self.objectives_names)
+        if not predict_curves:
+            Xs = []
+            fidelity_attr = list(self.fidelity_space.keys())[0]
+            for fidelity_index, fidelity_value in enumerate(self.fidelity_values):
+                X = hyperparameters.copy()
+                X[fidelity_attr] = fidelity_value
+                for seed in range(self.num_seeds):
+                    Xs.append(X)
+            X = pd.concat(Xs, ignore_index=True)
+            # y can be reshaped to
+            # (num_fidelities, num_seeds, num_evals, num_objectives), while
+            # objectives_evaluations has shape
+            # (num_evals, num_seeds, num_fidelities, num_objectives)
+            num_objectives = len(self.objectives_names)
+            y = pd.DataFrame(
+                data=objectives_evaluations.transpose((2, 1, 0, 3)).reshape(
+                    (-1, num_objectives)
+                ),
+                columns=self.objectives_names,
+            )
+        else:
+            Xs = [hyperparameters] * self.num_seeds
+            X = pd.concat(Xs, ignore_index=True)
+            # y can be reshaped to
+            # (num_seeds, num_evals, num_fidelities, num_objectives)
+            num_rows = objectives_evaluations.shape[0] * self.num_seeds
+            y = pd.DataFrame(
+                data=objectives_evaluations.transpose((1, 0, 2, 3)).reshape(
+                    (num_rows, -1)
+                )
+            )
         return X, y
 
     def rename_objectives(self, objective_name_mapping: Dict[str, str]):
@@ -252,7 +291,7 @@ class BlackboxTabular(Blackbox):
 
 
 def serialize(
-    bb_dict: Dict[str, BlackboxTabular], path: str, metadata: Optional[Dict] = None
+    bb_dict: Dict[str, BlackboxTabular], path: str, metadata: Optional[dict] = None
 ):
     # check all blackboxes share the same search space and have evaluated the same hyperparameters
     # pick an arbitrary blackbox
