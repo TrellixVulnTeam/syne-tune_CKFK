@@ -46,6 +46,7 @@ class SurrogateBenchmarkDefinition:
     surrogate_kwargs: Optional[dict] = None
     max_resource_attr: Optional[str] = None
     datasets: Optional[List[str]] = None
+    fidelities: Optional[List[int]] = None
 
     def __post_init__(self):
         if self.max_resource_attr is None:
