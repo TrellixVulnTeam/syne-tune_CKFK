@@ -57,7 +57,7 @@ class BlackboxSurrogate(Blackbox):
         fidelity_space: Optional[dict] = None,
         fidelity_values: Optional[np.array] = None,
         surrogate=None,
-        predict_curves: bool = True,
+        predict_curves: bool = False,
         num_seeds: int = 1,
         fit_differences: Optional[List[str]] = None,
         max_fit_samples: Optional[int] = None,
@@ -115,7 +115,7 @@ class BlackboxSurrogate(Blackbox):
             to convert rows in X to vectors. We use the configuration_space
             hyperparameters types to deduce the types of columns in X (for instance
             CategoricalHyperparameter are one-hot encoded).
-        :param predict_curves: See above. Default is True
+        :param predict_curves: See above. Default is False (backwards compatible)
         :param num_seeds: See above
         :param fit_differences: See above
         :param max_fit_samples: maximum number of samples to be fed to the surrogate
@@ -194,7 +194,9 @@ class BlackboxSurrogate(Blackbox):
         return num_fidelities
 
     @staticmethod
-    def make_model_pipeline(configuration_space, fidelity_space, model, predict_curves):
+    def make_model_pipeline(
+        configuration_space, fidelity_space, model, predict_curves=False
+    ):
         # gets hyperparameters types, categorical for CategoricalHyperparameter, numeric for everything else
         numeric = []
         categorical = []
@@ -337,7 +339,10 @@ class BlackboxSurrogate(Blackbox):
         surrogate_input = configuration.copy()
         single_fidelity = fidelity is not None
         do_fit_diffs = len(self.fit_differences) > 0
-        fidelity_attr = next(iter(self.fidelity_space.keys()))
+        if self.fidelity_values is not None:
+            fidelity_attr = next(iter(self.fidelity_space.keys()))
+        else:
+            fidelity_attr = None
         if not self.predict_curves:
             # Univariate regression, where fidelity is an input
             if (not do_fit_diffs) and (single_fidelity or self.fidelity_values is None):
