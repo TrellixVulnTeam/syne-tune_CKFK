@@ -543,7 +543,6 @@ yahpo_rbv2_instances = {
     "rpart": {
         "f1": [
             "41138",
-            "40981",
             "4134",
             "1220",
             "4154",
@@ -563,7 +562,6 @@ yahpo_rbv2_instances = {
             "41142",
             "40701",
             "40994",
-            "29",
             "31",
             "6332",
             "37",
@@ -578,7 +576,6 @@ yahpo_rbv2_instances = {
             "1067",
             "1063",
             "41162",
-            "3",
             "1485",
             "1056",
             "334",
@@ -594,12 +591,10 @@ yahpo_rbv2_instances = {
             "1494",
             "41161",
             "312",
-            "38",
             "44",
             "1040",
             "41146",
             "50",
-            "1510",
             "40983",
         ],
         "auc": [
@@ -618,7 +613,6 @@ yahpo_rbv2_instances = {
             "375",
             "1111",
             "40496",
-            "40966",
             "41150",
             "4534",
             "40900",
@@ -626,27 +620,23 @@ yahpo_rbv2_instances = {
             "41156",
             "1590",
             "1457",
-            "458",
             "469",
             "41157",
             "11",
             "1461",
             "1462",
             "1464",
-            "15",
             "40975",
             "41142",
             "40701",
             "40994",
             "23",
-            "1468",
             "40668",
             "29",
             "31",
             "6332",
             "37",
             "4541",
-            "40670",
             "23381",
             "151",
             "188",
@@ -668,20 +658,13 @@ yahpo_rbv2_instances = {
             "1067",
             "1063",
             "41162",
-            "3",
             "6",
             "1485",
             "1056",
-            "12",
-            "14",
-            "16",
-            "18",
-            "40979",
             "22",
             "1515",
             "554",
             "334",
-            "24",
             "1486",
             "23517",
             "1493",
@@ -698,20 +681,14 @@ yahpo_rbv2_instances = {
             "41165",
             "182",
             "312",
-            "40984",
             "1501",
             "40685",
-            "38",
             "42",
             "44",
-            "46",
             "40982",
             "1040",
             "41146",
-            "377",
-            "40499",
             "50",
-            "54",
             "41166",
             "307",
             "1497",
@@ -1514,8 +1491,8 @@ yahpo_rbv2_instances = {
 # TODO!!
 yahpo_rbv2_selected_instances = {
     "rpart": {
-        "f1": [],
-        "auc": [],
+        "f1": ["1111", "1464", "41161", "41157"],
+        "auc": ["1111", "40927", "1479", "4541", "41161"],
     },
     "glmnet": {
         "f1": [],
@@ -1548,73 +1525,69 @@ yahpo_rbv2_selected_instances = {
 # - For each HPO method: Smallest time where metric < final_val + eps
 #   (here, metric is minus auc or minus f1)
 # - max_wallclock_time is then the maximum over these 3 values
+# - Some rounding up/down after visual inspection
 # This failed with all 0 for xgboost-auc-* (all), svm-f1-* (many),
 # svm-auc-* (all),
 yahpo_rbv2_max_wallclock_time = {
-    "rpart-f1-41138": 169,  # {'RS': 105, 'BO': 169, 'ASHA': 86}
+    "rpart-f1-41138": 120,  # {'RS': 105, 'BO': 169, 'ASHA': 86}
     "rpart-f1-40981": 85,  # {'RS': 51, 'BO': 12, 'ASHA': 85}
     "rpart-f1-4134": 770,  # {'RS': 770, 'BO': 243, 'ASHA': 424}
     "rpart-f1-1220": 476,  # {'RS': 476, 'BO': 130, 'ASHA': 476}
     "rpart-f1-4154": 458,  # {'RS': 316, 'BO': 458, 'ASHA': 316}
     "rpart-f1-40978": 323,  # {'RS': 132, 'BO': 37, 'ASHA': 323}
-    "rpart-f1-1111": 834,  # {'RS': 834, 'BO': 51, 'ASHA': 788}
+    "rpart-f1-1111": 900,  # {'RS': 834, 'BO': 51, 'ASHA': 788}
     "rpart-f1-41150": 747,  # {'RS': 390, 'BO': 69, 'ASHA': 747}
     "rpart-f1-4534": 702,  # {'RS': 702, 'BO': 116, 'ASHA': 702}
     "rpart-f1-40900": 636,  # {'RS': 571, 'BO': 133, 'ASHA': 636}
     "rpart-f1-40536": 557,  # {'RS': 557, 'BO': 335, 'ASHA': 557}
     "rpart-f1-41156": 702,  # {'RS': 702, 'BO': 196, 'ASHA': 201}
     "rpart-f1-1590": 637,  # {'RS': 637, 'BO': 324, 'ASHA': 637}
-    "rpart-f1-41157": 805,  # {'RS': 805, 'BO': 244, 'ASHA': 642}
+    "rpart-f1-41157": 900,  # {'RS': 805, 'BO': 244, 'ASHA': 642}
     "rpart-f1-1461": 658,  # {'RS': 658, 'BO': 76, 'ASHA': 492}
     "rpart-f1-1462": 256,  # {'RS': 256, 'BO': 29, 'ASHA': 256}
-    "rpart-f1-1464": 896,  # {'RS': 896, 'BO': 893, 'ASHA': 896}
+    "rpart-f1-1464": 900,  # {'RS': 896, 'BO': 893, 'ASHA': 896}
     "rpart-f1-15": 256,  # {'RS': 256, 'BO': 100, 'ASHA': 256}
     "rpart-f1-41142": 781,  # {'RS': 781, 'BO': 236, 'ASHA': 419}
     "rpart-f1-40701": 456,  # {'RS': 321, 'BO': 53, 'ASHA': 456}
     "rpart-f1-40994": 456,  # {'RS': 456, 'BO': 59, 'ASHA': 456}
-    "rpart-f1-29": 6,  # {'RS': 1, 'BO': 6, 'ASHA': 1}
-    "rpart-f1-31": 852,  # {'RS': 851, 'BO': 438, 'ASHA': 852}
-    "rpart-f1-6332": 196,  # {'RS': 196, 'BO': 36, 'ASHA': 96}
+    "rpart-f1-31": 900,  # {'RS': 851, 'BO': 438, 'ASHA': 852}
+    "rpart-f1-6332": 120,  # {'RS': 196, 'BO': 36, 'ASHA': 96}
     "rpart-f1-37": 661,  # {'RS': 591, 'BO': 101, 'ASHA': 661}
     "rpart-f1-23381": 776,  # {'RS': 776, 'BO': 419, 'ASHA': 731}
     "rpart-f1-151": 704,  # {'RS': 704, 'BO': 79, 'ASHA': 704}
     "rpart-f1-41159": 759,  # {'RS': 443, 'BO': 759, 'ASHA': 373}
-    "rpart-f1-23512": 836,  # {'RS': 836, 'BO': 375, 'ASHA': 655}
+    "rpart-f1-23512": 900,  # {'RS': 836, 'BO': 375, 'ASHA': 655}
     "rpart-f1-1479": 246,  # {'RS': 246, 'BO': 100, 'ASHA': 246}
-    "rpart-f1-1480": 837,  # {'RS': 836, 'BO': 672, 'ASHA': 837}
+    "rpart-f1-1480": 900,  # {'RS': 836, 'BO': 672, 'ASHA': 837}
     "rpart-f1-41143": 207,  # {'RS': 207, 'BO': 122, 'ASHA': 207}
     "rpart-f1-1053": 476,  # {'RS': 476, 'BO': 283, 'ASHA': 476}
-    "rpart-f1-1067": 816,  # {'RS': 816, 'BO': 637, 'ASHA': 341}
-    "rpart-f1-1063": 851,  # {'RS': 851, 'BO': 311, 'ASHA': 851}
+    "rpart-f1-1067": 900,  # {'RS': 816, 'BO': 637, 'ASHA': 341}
+    "rpart-f1-1063": 900,  # {'RS': 851, 'BO': 311, 'ASHA': 851}
     "rpart-f1-41162": 723,  # {'RS': 723, 'BO': 596, 'ASHA': 682}
-    "rpart-f1-3": 166,  # {'RS': 166, 'BO': 29, 'ASHA': 166}
     "rpart-f1-1485": 465,  # {'RS': 465, 'BO': 28, 'ASHA': 317}
     "rpart-f1-1056": 316,  # {'RS': 316, 'BO': 224, 'ASHA': 316}
-    "rpart-f1-334": 892,  # {'RS': 892, 'BO': 341, 'ASHA': 892}
+    "rpart-f1-334": 900,  # {'RS': 892, 'BO': 341, 'ASHA': 892}
     "rpart-f1-24": 746,  # {'RS': 746, 'BO': 89, 'ASHA': 746}
     "rpart-f1-1486": 573,  # {'RS': 558, 'BO': 104, 'ASHA': 573}
     "rpart-f1-23517": 407,  # {'RS': 407, 'BO': 61, 'ASHA': 403}
     "rpart-f1-1487": 611,  # {'RS': 566, 'BO': 611, 'ASHA': 566}
     "rpart-f1-1068": 565,  # {'RS': 316, 'BO': 565, 'ASHA': 316}
     "rpart-f1-1050": 686,  # {'RS': 686, 'BO': 218, 'ASHA': 686}
-    "rpart-f1-1049": 816,  # {'RS': 816, 'BO': 416, 'ASHA': 211}
-    "rpart-f1-1489": 807,  # {'RS': 566, 'BO': 115, 'ASHA': 807}
+    "rpart-f1-1049": 900,  # {'RS': 816, 'BO': 416, 'ASHA': 211}
+    "rpart-f1-1489": 900,  # {'RS': 566, 'BO': 115, 'ASHA': 807}
     "rpart-f1-470": 778,  # {'RS': 686, 'BO': 778, 'ASHA': 686}
-    "rpart-f1-1494": 852,  # {'RS': 456, 'BO': 337, 'ASHA': 852}
-    "rpart-f1-41161": 881,  # {'RS': 485, 'BO': 753, 'ASHA': 881}
+    "rpart-f1-1494": 900,  # {'RS': 456, 'BO': 337, 'ASHA': 852}
+    "rpart-f1-41161": 900,  # {'RS': 485, 'BO': 753, 'ASHA': 881}
     "rpart-f1-312": 571,  # {'RS': 571, 'BO': 203, 'ASHA': 252}
-    "rpart-f1-38": 166,  # {'RS': 166, 'BO': 112, 'ASHA': 166}
     "rpart-f1-44": 552,  # {'RS': 552, 'BO': 86, 'ASHA': 552}
     "rpart-f1-1040": 256,  # {'RS': 256, 'BO': 85, 'ASHA': 256}
     "rpart-f1-41146": 701,  # {'RS': 701, 'BO': 302, 'ASHA': 216}
     "rpart-f1-50": 456,  # {'RS': 456, 'BO': 24, 'ASHA': 456}
-    "rpart-f1-1510": 77,  # {'RS': 61, 'BO': 77, 'ASHA': 61}
     "rpart-f1-40983": 321,  # {'RS': 236, 'BO': 109, 'ASHA': 321}
     "rpart-auc-41138": 784,  # {'RS': 66, 'BO': 155, 'ASHA': 784}
     "rpart-auc-4135": 642,  # {'RS': 101, 'BO': 642, 'ASHA': 551}
-    "rpart-auc-40981": 256,  # {'RS': 256, 'BO': 36, 'ASHA': 256}
     "rpart-auc-4134": 563,  # {'RS': 563, 'BO': 468, 'ASHA': 537}
-    "rpart-auc-40927": 879,  # {'RS': 851, 'BO': 879, 'ASHA': 622}
+    "rpart-auc-40927": 900,  # {'RS': 851, 'BO': 879, 'ASHA': 622}
     "rpart-auc-1220": 542,  # {'RS': 532, 'BO': 542, 'ASHA': 532}
     "rpart-auc-4154": 531,  # {'RS': 531, 'BO': 150, 'ASHA': 531}
     "rpart-auc-40923": 454,  # {'RS': 400, 'BO': 454, 'ASHA': 289}
@@ -1623,7 +1596,7 @@ yahpo_rbv2_max_wallclock_time = {
     "rpart-auc-4538": 636,  # {'RS': 636, 'BO': 210, 'ASHA': 636}
     "rpart-auc-40978": 310,  # {'RS': 145, 'BO': 37, 'ASHA': 310}
     "rpart-auc-375": 636,  # {'RS': 417, 'BO': 72, 'ASHA': 636}
-    "rpart-auc-1111": 827,  # {'RS': 680, 'BO': 595, 'ASHA': 827}
+    "rpart-auc-1111": 900,  # {'RS': 680, 'BO': 595, 'ASHA': 827}
     "rpart-auc-40496": 326,  # {'RS': 326, 'BO': 60, 'ASHA': 326}
     "rpart-auc-40966": 67,  # {'RS': 67, 'BO': 30, 'ASHA': 67}
     "rpart-auc-41150": 634,  # {'RS': 491, 'BO': 59, 'ASHA': 634}
@@ -1639,7 +1612,7 @@ yahpo_rbv2_max_wallclock_time = {
     "rpart-auc-11": 456,  # {'RS': 456, 'BO': 52, 'ASHA': 456}
     "rpart-auc-1461": 533,  # {'RS': 533, 'BO': 37, 'ASHA': 533}
     "rpart-auc-1462": 211,  # {'RS': 211, 'BO': 18, 'ASHA': 211}
-    "rpart-auc-1464": 897,  # {'RS': 897, 'BO': 41, 'ASHA': 897}
+    "rpart-auc-1464": 900,  # {'RS': 897, 'BO': 41, 'ASHA': 897}
     "rpart-auc-15": 30,  # {'RS': 30, 'BO': 12, 'ASHA': 30}
     "rpart-auc-40975": 456,  # {'RS': 456, 'BO': 36, 'ASHA': 456}
     "rpart-auc-41142": 636,  # {'RS': 636, 'BO': 341, 'ASHA': 378}
@@ -1647,12 +1620,12 @@ yahpo_rbv2_max_wallclock_time = {
     "rpart-auc-40994": 456,  # {'RS': 456, 'BO': 64, 'ASHA': 456}
     "rpart-auc-23": 586,  # {'RS': 586, 'BO': 83, 'ASHA': 586}
     "rpart-auc-1468": 68,  # {'RS': 68, 'BO': 48, 'ASHA': 68}
-    "rpart-auc-40668": 897,  # {'RS': 897, 'BO': 789, 'ASHA': 897}
+    "rpart-auc-40668": 900,  # {'RS': 897, 'BO': 789, 'ASHA': 897}
     "rpart-auc-29": 441,  # {'RS': 441, 'BO': 29, 'ASHA': 441}
     "rpart-auc-31": 532,  # {'RS': 531, 'BO': 354, 'ASHA': 532}
     "rpart-auc-6332": 531,  # {'RS': 531, 'BO': 35, 'ASHA': 531}
     "rpart-auc-37": 256,  # {'RS': 256, 'BO': 249, 'ASHA': 256}
-    "rpart-auc-4541": 799,  # {'RS': 798, 'BO': 799, 'ASHA': 798}
+    "rpart-auc-4541": 900,  # {'RS': 798, 'BO': 799, 'ASHA': 798}
     "rpart-auc-40670": 66,  # {'RS': 66, 'BO': 29, 'ASHA': 66}
     "rpart-auc-23381": 657,  # {'RS': 256, 'BO': 657, 'ASHA': 531}
     "rpart-auc-151": 704,  # {'RS': 704, 'BO': 43, 'ASHA': 704}
@@ -1663,9 +1636,9 @@ yahpo_rbv2_max_wallclock_time = {
     "rpart-auc-41159": 740,  # {'RS': 740, 'BO': 550, 'ASHA': 402}
     "rpart-auc-1478": 637,  # {'RS': 637, 'BO': 209, 'ASHA': 637}
     "rpart-auc-41169": 759,  # {'RS': 572, 'BO': 159, 'ASHA': 759}
-    "rpart-auc-23512": 774,  # {'RS': 494, 'BO': 139, 'ASHA': 774}
+    "rpart-auc-23512": 660,  # {'RS': 494, 'BO': 139, 'ASHA': 774}
     "rpart-auc-1479": 841,  # {'RS': 431, 'BO': 580, 'ASHA': 841}
-    "rpart-auc-41212": 842,  # {'RS': 842, 'BO': 29, 'ASHA': 842}
+    "rpart-auc-41212": 600,  # {'RS': 842, 'BO': 29, 'ASHA': 842}
     "rpart-auc-1480": 531,  # {'RS': 531, 'BO': 29, 'ASHA': 531}
     "rpart-auc-300": 149,  # {'RS': 75, 'BO': 69, 'ASHA': 149}
     "rpart-auc-41168": 770,  # {'RS': 770, 'BO': 43, 'ASHA': 683}
@@ -1689,19 +1662,19 @@ yahpo_rbv2_max_wallclock_time = {
     "rpart-auc-554": 166,  # {'RS': 166, 'BO': 163, 'ASHA': 104}
     "rpart-auc-334": 531,  # {'RS': 531, 'BO': 138, 'ASHA': 531}
     "rpart-auc-24": 30,  # {'RS': 30, 'BO': 29, 'ASHA': 30}
-    "rpart-auc-1486": 898,  # {'RS': 463, 'BO': 62, 'ASHA': 898}
+    "rpart-auc-1486": 900,  # {'RS': 463, 'BO': 62, 'ASHA': 898}
     "rpart-auc-23517": 172,  # {'RS': 172, 'BO': 66, 'ASHA': 170}
     "rpart-auc-1493": 332,  # {'RS': 332, 'BO': 54, 'ASHA': 305}
     "rpart-auc-28": 417,  # {'RS': 417, 'BO': 54, 'ASHA': 302}
-    "rpart-auc-1487": 842,  # {'RS': 841, 'BO': 151, 'ASHA': 842}
+    "rpart-auc-1487": 900,  # {'RS': 841, 'BO': 151, 'ASHA': 842}
     "rpart-auc-1068": 531,  # {'RS': 531, 'BO': 64, 'ASHA': 531}
-    "rpart-auc-1050": 897,  # {'RS': 531, 'BO': 324, 'ASHA': 897}
-    "rpart-auc-1049": 842,  # {'RS': 842, 'BO': 29, 'ASHA': 842}
+    "rpart-auc-1050": 900,  # {'RS': 531, 'BO': 324, 'ASHA': 897}
+    "rpart-auc-1049": 360,  # {'RS': 842, 'BO': 29, 'ASHA': 842}
     "rpart-auc-32": 458,  # {'RS': 456, 'BO': 79, 'ASHA': 458}
     "rpart-auc-1489": 456,  # {'RS': 456, 'BO': 53, 'ASHA': 456}
     "rpart-auc-470": 536,  # {'RS': 96, 'BO': 205, 'ASHA': 536}
     "rpart-auc-1494": 456,  # {'RS': 456, 'BO': 60, 'ASHA': 456}
-    "rpart-auc-41161": 795,  # {'RS': 795, 'BO': 564, 'ASHA': 423}
+    "rpart-auc-41161": 900,  # {'RS': 795, 'BO': 564, 'ASHA': 423}
     "rpart-auc-41165": 514,  # {'RS': 514, 'BO': 495, 'ASHA': 261}
     "rpart-auc-182": 636,  # {'RS': 551, 'BO': 221, 'ASHA': 636}
     "rpart-auc-312": 456,  # {'RS': 456, 'BO': 36, 'ASHA': 456}
@@ -1719,21 +1692,21 @@ yahpo_rbv2_max_wallclock_time = {
     "rpart-auc-40499": 67,  # {'RS': 67, 'BO': 30, 'ASHA': 67}
     "rpart-auc-50": 456,  # {'RS': 456, 'BO': 25, 'ASHA': 456}
     "rpart-auc-54": 66,  # {'RS': 66, 'BO': 53, 'ASHA': 66}
-    "rpart-auc-41166": 835,  # {'RS': 835, 'BO': 133, 'ASHA': 544}
+    "rpart-auc-41166": 900,  # {'RS': 835, 'BO': 133, 'ASHA': 544}
     "rpart-auc-307": 456,  # {'RS': 456, 'BO': 41, 'ASHA': 456}
     "rpart-auc-1497": 256,  # {'RS': 256, 'BO': 72, 'ASHA': 256}
     "rpart-auc-60": 571,  # {'RS': 571, 'BO': 42, 'ASHA': 551}
     "rpart-auc-1510": 256,  # {'RS': 256, 'BO': 23, 'ASHA': 256}
     "rpart-auc-40983": 456,  # {'RS': 456, 'BO': 41, 'ASHA': 456}
-    "rpart-auc-40498": 897,  # {'RS': 656, 'BO': 427, 'ASHA': 897}
+    "rpart-auc-40498": 900,  # {'RS': 656, 'BO': 427, 'ASHA': 897}
     "rpart-auc-181": 456,  # {'RS': 456, 'BO': 63, 'ASHA': 456}
-    "glmnet-f1-41138": 713,  # {'RS': 713, 'BO': 648, 'ASHA': 348}
+    "glmnet-f1-41138": 540,  # {'RS': 713, 'BO': 648, 'ASHA': 348}
     "glmnet-f1-40981": 36,  # {'RS': 36, 'BO': 24, 'ASHA': 36}
     "glmnet-f1-4134": 167,  # {'RS': 70, 'BO': 167, 'ASHA': 82}
     "glmnet-f1-1220": 538,  # {'RS': 538, 'BO': 60, 'ASHA': 534}
     "glmnet-f1-4154": 298,  # {'RS': 298, 'BO': 39, 'ASHA': 178}
     "glmnet-f1-40978": 20,  # {'RS': 20, 'BO': 11, 'ASHA': 16}
-    "glmnet-f1-1111": 892,  # {'RS': 627, 'BO': 892, 'ASHA': 627}
+    "glmnet-f1-1111": 900,  # {'RS': 627, 'BO': 892, 'ASHA': 627}
     "glmnet-f1-41150": 845,  # {'RS': 562, 'BO': 789, 'ASHA': 845}
     "glmnet-f1-4534": 6,  # {'RS': 6, 'BO': 6, 'ASHA': 6}
     "glmnet-f1-40900": 136,  # {'RS': 136, 'BO': 23, 'ASHA': 136}
