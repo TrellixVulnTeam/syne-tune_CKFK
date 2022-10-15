@@ -1598,7 +1598,6 @@ yahpo_rbv2_max_wallclock_time = {
     "rpart-auc-375": 636,  # {'RS': 417, 'BO': 72, 'ASHA': 636}
     "rpart-auc-1111": 900,  # {'RS': 680, 'BO': 595, 'ASHA': 827}
     "rpart-auc-40496": 326,  # {'RS': 326, 'BO': 60, 'ASHA': 326}
-    "rpart-auc-40966": 67,  # {'RS': 67, 'BO': 30, 'ASHA': 67}
     "rpart-auc-41150": 634,  # {'RS': 491, 'BO': 59, 'ASHA': 634}
     "rpart-auc-4534": 653,  # {'RS': 456, 'BO': 653, 'ASHA': 456}
     "rpart-auc-40900": 456,  # {'RS': 456, 'BO': 30, 'ASHA': 456}
@@ -1606,27 +1605,23 @@ yahpo_rbv2_max_wallclock_time = {
     "rpart-auc-41156": 636,  # {'RS': 636, 'BO': 48, 'ASHA': 636}
     "rpart-auc-1590": 657,  # {'RS': 657, 'BO': 36, 'ASHA': 657}
     "rpart-auc-1457": 645,  # {'RS': 391, 'BO': 181, 'ASHA': 645}
-    "rpart-auc-458": 66,  # {'RS': 66, 'BO': 24, 'ASHA': 66}
     "rpart-auc-469": 637,  # {'RS': 636, 'BO': 315, 'ASHA': 637}
     "rpart-auc-41157": 765,  # {'RS': 765, 'BO': 316, 'ASHA': 616}
     "rpart-auc-11": 456,  # {'RS': 456, 'BO': 52, 'ASHA': 456}
     "rpart-auc-1461": 533,  # {'RS': 533, 'BO': 37, 'ASHA': 533}
     "rpart-auc-1462": 211,  # {'RS': 211, 'BO': 18, 'ASHA': 211}
     "rpart-auc-1464": 900,  # {'RS': 897, 'BO': 41, 'ASHA': 897}
-    "rpart-auc-15": 30,  # {'RS': 30, 'BO': 12, 'ASHA': 30}
     "rpart-auc-40975": 456,  # {'RS': 456, 'BO': 36, 'ASHA': 456}
     "rpart-auc-41142": 636,  # {'RS': 636, 'BO': 341, 'ASHA': 378}
     "rpart-auc-40701": 456,  # {'RS': 456, 'BO': 30, 'ASHA': 456}
     "rpart-auc-40994": 456,  # {'RS': 456, 'BO': 64, 'ASHA': 456}
     "rpart-auc-23": 586,  # {'RS': 586, 'BO': 83, 'ASHA': 586}
-    "rpart-auc-1468": 68,  # {'RS': 68, 'BO': 48, 'ASHA': 68}
     "rpart-auc-40668": 900,  # {'RS': 897, 'BO': 789, 'ASHA': 897}
     "rpart-auc-29": 441,  # {'RS': 441, 'BO': 29, 'ASHA': 441}
     "rpart-auc-31": 532,  # {'RS': 531, 'BO': 354, 'ASHA': 532}
     "rpart-auc-6332": 531,  # {'RS': 531, 'BO': 35, 'ASHA': 531}
     "rpart-auc-37": 256,  # {'RS': 256, 'BO': 249, 'ASHA': 256}
     "rpart-auc-4541": 900,  # {'RS': 798, 'BO': 799, 'ASHA': 798}
-    "rpart-auc-40670": 66,  # {'RS': 66, 'BO': 29, 'ASHA': 66}
     "rpart-auc-23381": 657,  # {'RS': 256, 'BO': 657, 'ASHA': 531}
     "rpart-auc-151": 704,  # {'RS': 704, 'BO': 43, 'ASHA': 704}
     "rpart-auc-188": 456,  # {'RS': 456, 'BO': 41, 'ASHA': 456}
@@ -1648,20 +1643,13 @@ yahpo_rbv2_max_wallclock_time = {
     "rpart-auc-1067": 531,  # {'RS': 531, 'BO': 29, 'ASHA': 531}
     "rpart-auc-1063": 456,  # {'RS': 456, 'BO': 55, 'ASHA': 456}
     "rpart-auc-41162": 569,  # {'RS': 569, 'BO': 69, 'ASHA': 542}
-    "rpart-auc-3": 66,  # {'RS': 66, 'BO': 29, 'ASHA': 66}
     "rpart-auc-6": 116,  # {'RS': 116, 'BO': 30, 'ASHA': 116}
     "rpart-auc-1485": 641,  # {'RS': 641, 'BO': 107, 'ASHA': 641}
     "rpart-auc-1056": 531,  # {'RS': 531, 'BO': 150, 'ASHA': 531}
-    "rpart-auc-12": 67,  # {'RS': 31, 'BO': 67, 'ASHA': 31}
-    "rpart-auc-14": 67,  # {'RS': 67, 'BO': 61, 'ASHA': 67}
-    "rpart-auc-16": 67,  # {'RS': 67, 'BO': 26, 'ASHA': 67}
-    "rpart-auc-18": 26,  # {'RS': 21, 'BO': 24, 'ASHA': 26}
-    "rpart-auc-40979": 67,  # {'RS': 67, 'BO': 31, 'ASHA': 67}
     "rpart-auc-22": 326,  # {'RS': 326, 'BO': 35, 'ASHA': 326}
     "rpart-auc-1515": 456,  # {'RS': 456, 'BO': 55, 'ASHA': 456}
     "rpart-auc-554": 166,  # {'RS': 166, 'BO': 163, 'ASHA': 104}
     "rpart-auc-334": 531,  # {'RS': 531, 'BO': 138, 'ASHA': 531}
-    "rpart-auc-24": 30,  # {'RS': 30, 'BO': 29, 'ASHA': 30}
     "rpart-auc-1486": 900,  # {'RS': 463, 'BO': 62, 'ASHA': 898}
     "rpart-auc-23517": 172,  # {'RS': 172, 'BO': 66, 'ASHA': 170}
     "rpart-auc-1493": 332,  # {'RS': 332, 'BO': 54, 'ASHA': 305}
@@ -1678,20 +1666,14 @@ yahpo_rbv2_max_wallclock_time = {
     "rpart-auc-41165": 514,  # {'RS': 514, 'BO': 495, 'ASHA': 261}
     "rpart-auc-182": 636,  # {'RS': 551, 'BO': 221, 'ASHA': 636}
     "rpart-auc-312": 456,  # {'RS': 456, 'BO': 36, 'ASHA': 456}
-    "rpart-auc-40984": 7,  # {'RS': 1, 'BO': 7, 'ASHA': 6}
     "rpart-auc-1501": 456,  # {'RS': 456, 'BO': 73, 'ASHA': 456}
     "rpart-auc-40685": 456,  # {'RS': 456, 'BO': 67, 'ASHA': 456}
-    "rpart-auc-38": 61,  # {'RS': 61, 'BO': 12, 'ASHA': 61}
     "rpart-auc-42": 456,  # {'RS': 456, 'BO': 305, 'ASHA': 456}
     "rpart-auc-44": 457,  # {'RS': 457, 'BO': 36, 'ASHA': 457}
-    "rpart-auc-46": 61,  # {'RS': 61, 'BO': 30, 'ASHA': 61}
     "rpart-auc-40982": 456,  # {'RS': 456, 'BO': 53, 'ASHA': 456}
     "rpart-auc-1040": 256,  # {'RS': 256, 'BO': 35, 'ASHA': 256}
     "rpart-auc-41146": 456,  # {'RS': 456, 'BO': 82, 'ASHA': 456}
-    "rpart-auc-377": 66,  # {'RS': 66, 'BO': 35, 'ASHA': 66}
-    "rpart-auc-40499": 67,  # {'RS': 67, 'BO': 30, 'ASHA': 67}
     "rpart-auc-50": 456,  # {'RS': 456, 'BO': 25, 'ASHA': 456}
-    "rpart-auc-54": 66,  # {'RS': 66, 'BO': 53, 'ASHA': 66}
     "rpart-auc-41166": 900,  # {'RS': 835, 'BO': 133, 'ASHA': 544}
     "rpart-auc-307": 456,  # {'RS': 456, 'BO': 41, 'ASHA': 456}
     "rpart-auc-1497": 256,  # {'RS': 256, 'BO': 72, 'ASHA': 256}
