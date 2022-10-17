@@ -64,6 +64,11 @@ def parse_args(methods: dict, extra_args: Optional[List[dict]] = None):
                 help="Maximum runtime for experiment",
             ),
             dict(
+                name="instance_type",
+                type=str,
+                help="AWS SageMaker instance type",
+            ),
+            dict(
                 name="max_failures",
                 type=int,
                 default=3,
@@ -113,11 +118,11 @@ def main(
     sm_args["dependencies"] = benchmarking.__path__
     if args.warm_pool:
         print(
-            "------------------------------------------------------------------------\n"
+            "--------------------------------------------------------------------------\n"
             "Using SageMaker managed warm pools in order to decrease start-up delays.\n"
-            "In order for this to work, you need to have quotas of the type\n"
+            f"In order for this to work, you need to have at least {benchmark.n_workers} quotas of the type\n"
             f"   {benchmark.instance_type} for training warm pool usage\n"
-            "------------------------------------------------------------------------"
+            "--------------------------------------------------------------------------"
         )
         sm_args["keep_alive_period_in_seconds"] = WARM_POOL_KEEP_ALIVE_PERIOD_IN_SECONDS
     trial_backend = SageMakerBackend(
