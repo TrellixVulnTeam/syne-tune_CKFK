@@ -882,34 +882,25 @@ yahpo_rbv2_instances = {
             "4538",
             "40978",
             "375",
-            "40496",
             "4534",
             "40900",
             "40536",
             "41156",
             "1590",
-            "1457",
-            "458",
             "469",
             "41157",
-            "11",
             "1461",
             "1464",
-            "15",
             "41142",
             "40701",
-            "40994",
             "23",
-            "1468",
             "40668",
             "29",
             "31",
             "6332",
             "37",
-            "40670",
             "23381",
             "151",
-            "188",
             "41164",
             "1475",
             "1478",
@@ -921,15 +912,10 @@ yahpo_rbv2_instances = {
             "41027",
             "1067",
             "1063",
-            "3",
             "6",
             "1485",
             "1056",
-            "12",
             "14",
-            "16",
-            "18",
-            "40979",
             "22",
             "1515",
             "334",
@@ -939,27 +925,17 @@ yahpo_rbv2_instances = {
             "1068",
             "1050",
             "1049",
-            "1489",
             "470",
             "1494",
             "182",
             "312",
-            "40984",
-            "1501",
-            "38",
-            "42",
             "44",
-            "46",
-            "40982",
             "41146",
-            "377",
             "40499",
             "54",
             "41216",
             "307",
             "60",
-            "1510",
-            "40983",
             "40498",
             "181",
             "41163",
@@ -1467,7 +1443,17 @@ yahpo_rbv2_selected_instances = {
             "41157",
             "41159",
         ],
-        "auc": [],
+        "auc": [
+            "1220",
+            "1461",
+            "23517",
+            "41166",
+            "41168",
+            "41142",
+            "151",
+            "41164",
+            "1479",
+        ],
     },
     "xgboost": {
         "f1": [],
@@ -1785,7 +1771,7 @@ yahpo_rbv2_max_wallclock_time = {
     "ranger-f1-1050": 900,  # {'RS': 531, 'BO': 885, 'ASHA': 863}
     "ranger-f1-1049": 511,  # {'RS': 511, 'BO': 177, 'ASHA': 504}
     "ranger-f1-1489": 588,  # {'RS': 588, 'BO': 552, 'ASHA': 527}
-    "ranger-f1-470": 877,  # {'RS': 676, 'BO': 643, 'ASHA': 877}
+    "ranger-f1-470": 900,  # {'RS': 676, 'BO': 643, 'ASHA': 877}
     "ranger-f1-1494": 600,  # {'RS': 728, 'BO': 359, 'ASHA': 428}
     "ranger-f1-312": 540,  # {'RS': 362, 'BO': 621, 'ASHA': 766}
     "ranger-f1-38": 716,  # {'RS': 716, 'BO': 407, 'ASHA': 308}
@@ -1803,60 +1789,46 @@ yahpo_rbv2_max_wallclock_time = {
     "ranger-f1-23512": 474,  # {'RS': 410, 'BO': 474, 'ASHA': 464}
     "ranger-auc-4135": 560,  # {'RS': 420, 'BO': 472, 'ASHA': 560}
     "ranger-auc-40981": 341,  # {'RS': 282, 'BO': 86, 'ASHA': 341}
-    "ranger-auc-4134": 753,  # {'RS': 696, 'BO': 650, 'ASHA': 753}
-    "ranger-auc-1220": 864,  # {'RS': 385, 'BO': 864, 'ASHA': 724}
+    "ranger-auc-4134": 720,  # {'RS': 696, 'BO': 650, 'ASHA': 753}
+    "ranger-auc-1220": 720,  # {'RS': 385, 'BO': 864, 'ASHA': 724}
     "ranger-auc-4154": 491,  # {'RS': 427, 'BO': 468, 'ASHA': 491}
     "ranger-auc-4538": 753,  # {'RS': 596, 'BO': 708, 'ASHA': 753}
     "ranger-auc-40978": 549,  # {'RS': 549, 'BO': 308, 'ASHA': 549}
     "ranger-auc-375": 767,  # {'RS': 767, 'BO': 552, 'ASHA': 626}
-    "ranger-auc-40496": 192,  # {'RS': 127, 'BO': 192, 'ASHA': 113}
     "ranger-auc-4534": 574,  # {'RS': 149, 'BO': 574, 'ASHA': 103}
     "ranger-auc-40900": 382,  # {'RS': 202, 'BO': 382, 'ASHA': 340}
     "ranger-auc-40536": 715,  # {'RS': 704, 'BO': 715, 'ASHA': 678}
     "ranger-auc-41156": 393,  # {'RS': 160, 'BO': 160, 'ASHA': 393}
     "ranger-auc-1590": 720,  # {'RS': 570, 'BO': 894, 'ASHA': 238}
-    "ranger-auc-1457": 31,  # {'RS': 13, 'BO': 31, 'ASHA': 9}
-    "ranger-auc-458": 2,  # {'RS': 2, 'BO': 2, 'ASHA': 2}
-    "ranger-auc-469": 288,  # {'RS': 281, 'BO': 288, 'ASHA': 276}
+    "ranger-auc-469": 180,  # {'RS': 281, 'BO': 288, 'ASHA': 276}
     "ranger-auc-41157": 653,  # {'RS': 498, 'BO': 515, 'ASHA': 653}
-    "ranger-auc-11": 73,  # {'RS': 13, 'BO': 57, 'ASHA': 73}
-    "ranger-auc-1461": 869,  # {'RS': 576, 'BO': 633, 'ASHA': 869}
+    "ranger-auc-1461": 900,  # {'RS': 576, 'BO': 633, 'ASHA': 869}
     "ranger-auc-1464": 547,  # {'RS': 490, 'BO': 547, 'ASHA': 211}
-    "ranger-auc-15": 2,  # {'RS': 2, 'BO': 2, 'ASHA': 2}
-    "ranger-auc-41142": 860,  # {'RS': 746, 'BO': 860, 'ASHA': 770}
+    "ranger-auc-41142": 900,  # {'RS': 746, 'BO': 860, 'ASHA': 770}
     "ranger-auc-40701": 291,  # {'RS': 160, 'BO': 252, 'ASHA': 291}
-    "ranger-auc-40994": 119,  # {'RS': 111, 'BO': 119, 'ASHA': 101}
     "ranger-auc-23": 336,  # {'RS': 157, 'BO': 336, 'ASHA': 224}
-    "ranger-auc-1468": 149,  # {'RS': 31, 'BO': 149, 'ASHA': 46}
     "ranger-auc-40668": 743,  # {'RS': 400, 'BO': 743, 'ASHA': 338}
     "ranger-auc-29": 491,  # {'RS': 285, 'BO': 240, 'ASHA': 491}
-    "ranger-auc-31": 819,  # {'RS': 422, 'BO': 819, 'ASHA': 610}
-    "ranger-auc-6332": 815,  # {'RS': 815, 'BO': 328, 'ASHA': 476}
+    "ranger-auc-31": 900,  # {'RS': 422, 'BO': 819, 'ASHA': 610}
+    "ranger-auc-6332": 600,  # {'RS': 815, 'BO': 328, 'ASHA': 476}
     "ranger-auc-37": 357,  # {'RS': 145, 'BO': 357, 'ASHA': 272}
-    "ranger-auc-40670": 56,  # {'RS': 25, 'BO': 56, 'ASHA': 44}
     "ranger-auc-23381": 550,  # {'RS': 550, 'BO': 531, 'ASHA': 289}
-    "ranger-auc-151": 749,  # {'RS': 749, 'BO': 380, 'ASHA': 379}
-    "ranger-auc-188": 170,  # {'RS': 170, 'BO': 137, 'ASHA': 123}
-    "ranger-auc-41164": 788,  # {'RS': 788, 'BO': 704, 'ASHA': 754}
-    "ranger-auc-1475": 741,  # {'RS': 108, 'BO': 741, 'ASHA': 211}
+    "ranger-auc-151": 600,  # {'RS': 749, 'BO': 380, 'ASHA': 379}
+    "ranger-auc-41164": 780,  # {'RS': 788, 'BO': 704, 'ASHA': 754}
+    "ranger-auc-1475": 600,  # {'RS': 108, 'BO': 741, 'ASHA': 211}
     "ranger-auc-1478": 617,  # {'RS': 520, 'BO': 617, 'ASHA': 318}
-    "ranger-auc-1479": 786,  # {'RS': 545, 'BO': 786, 'ASHA': 720}
-    "ranger-auc-41212": 734,  # {'RS': 368, 'BO': 488, 'ASHA': 734}
+    "ranger-auc-1479": 840,  # {'RS': 545, 'BO': 786, 'ASHA': 720}
+    "ranger-auc-41212": 600,  # {'RS': 368, 'BO': 488, 'ASHA': 734}
     "ranger-auc-1480": 368,  # {'RS': 321, 'BO': 368, 'ASHA': 256}
     "ranger-auc-41143": 750,  # {'RS': 318, 'BO': 750, 'ASHA': 642}
     "ranger-auc-1053": 719,  # {'RS': 638, 'BO': 719, 'ASHA': 419}
     "ranger-auc-41027": 731,  # {'RS': 626, 'BO': 731, 'ASHA': 676}
     "ranger-auc-1067": 652,  # {'RS': 652, 'BO': 323, 'ASHA': 515}
     "ranger-auc-1063": 422,  # {'RS': 422, 'BO': 411, 'ASHA': 318}
-    "ranger-auc-3": 29,  # {'RS': 29, 'BO': 14, 'ASHA': 29}
     "ranger-auc-6": 340,  # {'RS': 249, 'BO': 336, 'ASHA': 340}
     "ranger-auc-1485": 686,  # {'RS': 686, 'BO': 561, 'ASHA': 667}
-    "ranger-auc-1056": 818,  # {'RS': 818, 'BO': 220, 'ASHA': 406}
-    "ranger-auc-12": 3,  # {'RS': 2, 'BO': 3, 'ASHA': 2}
+    "ranger-auc-1056": 600,  # {'RS': 818, 'BO': 220, 'ASHA': 406}
     "ranger-auc-14": 317,  # {'RS': 70, 'BO': 317, 'ASHA': 116}
-    "ranger-auc-16": 27,  # {'RS': 22, 'BO': 23, 'ASHA': 27}
-    "ranger-auc-18": 115,  # {'RS': 115, 'BO': 89, 'ASHA': 73}
-    "ranger-auc-40979": 3,  # {'RS': 3, 'BO': 3, 'ASHA': 3}
     "ranger-auc-22": 704,  # {'RS': 80, 'BO': 704, 'ASHA': 124}
     "ranger-auc-1515": 294,  # {'RS': 286, 'BO': 250, 'ASHA': 294}
     "ranger-auc-334": 498,  # {'RS': 498, 'BO': 43, 'ASHA': 409}
@@ -1866,35 +1838,25 @@ yahpo_rbv2_max_wallclock_time = {
     "ranger-auc-1068": 331,  # {'RS': 141, 'BO': 215, 'ASHA': 331}
     "ranger-auc-1050": 573,  # {'RS': 108, 'BO': 573, 'ASHA': 506}
     "ranger-auc-1049": 290,  # {'RS': 290, 'BO': 99, 'ASHA': 103}
-    "ranger-auc-1489": 251,  # {'RS': 251, 'BO': 117, 'ASHA': 131}
     "ranger-auc-470": 466,  # {'RS': 466, 'BO': 321, 'ASHA': 410}
     "ranger-auc-1494": 242,  # {'RS': 75, 'BO': 111, 'ASHA': 242}
     "ranger-auc-182": 640,  # {'RS': 640, 'BO': 444, 'ASHA': 314}
-    "ranger-auc-312": 103,  # {'RS': 72, 'BO': 101, 'ASHA': 103}
-    "ranger-auc-40984": 55,  # {'RS': 10, 'BO': 55, 'ASHA': 10}
-    "ranger-auc-1501": 75,  # {'RS': 75, 'BO': 29, 'ASHA': 22}
-    "ranger-auc-38": 66,  # {'RS': 66, 'BO': 37, 'ASHA': 52}
-    "ranger-auc-42": 28,  # {'RS': 25, 'BO': 28, 'ASHA': 26}
+    "ranger-auc-312": 120,  # {'RS': 72, 'BO': 101, 'ASHA': 103}
     "ranger-auc-44": 276,  # {'RS': 191, 'BO': 276, 'ASHA': 216}
-    "ranger-auc-46": 44,  # {'RS': 16, 'BO': 44, 'ASHA': 17}
-    "ranger-auc-40982": 240,  # {'RS': 240, 'BO': 199, 'ASHA': 141}
     "ranger-auc-41146": 438,  # {'RS': 385, 'BO': 270, 'ASHA': 438}
-    "ranger-auc-377": 2,  # {'RS': 1, 'BO': 2, 'ASHA': 1}
     "ranger-auc-40499": 673,  # {'RS': 673, 'BO': 377, 'ASHA': 501}
     "ranger-auc-54": 684,  # {'RS': 35, 'BO': 684, 'ASHA': 32}
     "ranger-auc-41216": 427,  # {'RS': 399, 'BO': 121, 'ASHA': 427}
     "ranger-auc-307": 271,  # {'RS': 271, 'BO': 104, 'ASHA': 212}
-    "ranger-auc-60": 795,  # {'RS': 426, 'BO': 795, 'ASHA': 260}
-    "ranger-auc-1510": 12,  # {'RS': 12, 'BO': 6, 'ASHA': 12}
-    "ranger-auc-40983": 28,  # {'RS': 13, 'BO': 28, 'ASHA': 13}
+    "ranger-auc-60": 600,  # {'RS': 426, 'BO': 795, 'ASHA': 260}
     "ranger-auc-40498": 652,  # {'RS': 360, 'BO': 570, 'ASHA': 652}
     "ranger-auc-181": 400,  # {'RS': 176, 'BO': 181, 'ASHA': 400}
     "ranger-auc-41163": 755,  # {'RS': 755, 'BO': 263, 'ASHA': 755}
-    "ranger-auc-300": 74,  # {'RS': 56, 'BO': 12, 'ASHA': 74}
-    "ranger-auc-23517": 869,  # {'RS': 869, 'BO': 815, 'ASHA': 245}
-    "ranger-auc-41166": 815,  # {'RS': 815, 'BO': 768, 'ASHA': 691}
+    "ranger-auc-300": 80,  # {'RS': 56, 'BO': 12, 'ASHA': 74}
+    "ranger-auc-23517": 900,  # {'RS': 869, 'BO': 815, 'ASHA': 245}
+    "ranger-auc-41166": 900,  # {'RS': 815, 'BO': 768, 'ASHA': 691}
     "ranger-auc-23512": 677,  # {'RS': 677, 'BO': 558, 'ASHA': 593}
-    "ranger-auc-41168": 820,  # {'RS': 761, 'BO': 787, 'ASHA': 820}
+    "ranger-auc-41168": 900,  # {'RS': 761, 'BO': 787, 'ASHA': 820}
     "ranger-auc-1493": 291,  # {'RS': 49, 'BO': 105, 'ASHA': 291}
     "xgboost-f1-41143": 395,  # {'RS': 395, 'BO': 165, 'ASHA': 267}
     "xgboost-f1-470": 126,  # {'RS': 16, 'BO': 126, 'ASHA': 22}
